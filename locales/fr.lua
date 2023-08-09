@@ -1,7 +1,12 @@
 local Translations = {
-
+    error = {
         need_chips = 'Vous avez besoin de %{Chipsamount} jetons pour tourner la roue!',
+        time = 'Revenez plus tard pour tourner la roue!',
+    },
+    success = {
         You_Won = 'Vous avez gagné %{prize}',
+    },
+    general = {
         pistol = 'un calibre .50!',
         cash = '$300,000 en Cash!',
         Marked = 'des billets marqués!',
@@ -13,9 +18,13 @@ local Translations = {
         sender = 'The Diamond Casino',
         subject = 'Votre nouvelle voiture!',
         message = 'Votre nouvelle voiture vous attend au Parking du Motel!'
+    },
 }
 
-Lang = Locale:new({
-    phrases = Translations,
-    warnOnMissing = true
-})
+if GetConvar('qb_locale', 'en') == 'fr' then
+    Lang = Locale:new({
+        phrases = Translations,
+        warnOnMissing = true,
+        fallbackLang = Lang,
+    })
+  end

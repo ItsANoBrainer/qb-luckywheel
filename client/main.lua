@@ -46,7 +46,7 @@ CreateThread(function()
                         type = "client",
                         event = "qb-luckywheel:spinwheel",
                         icon = "fas fa-redo",
-                        label = Lang:t('Spin_Wheel', {wheel_amount = Config.Amount}),
+                        label = Lang:t('general.Spin_Wheel', {wheel_amount = Config.Amount}),
                     },
                 },
                 distance = 2.5
@@ -57,7 +57,7 @@ CreateThread(function()
             local coords = GetEntityCoords(PlayerPedId())
             if #(coords - vector3(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z)) < 1.5 and not isRolling then
                 sleep = 5
-                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~]'..Lang:t('Spin_Wheel', {wheel_ammount = Config.Amount}))
+                QBCore.Functions.DrawText3D(Config.WheelPos.x, Config.WheelPos.y, Config.WheelPos.z + 1, '[~g~E~w~]'..Lang:t('general.Spin_Wheel', {wheel_amount = Config.Amount}))
                 if IsControlJustReleased(0, 38) then
                     doRoll()
                 end
@@ -272,9 +272,9 @@ function doRoll()
                 TriggerServerEvent('qb-luckywheel:server:getLucky')
                 TaskPlayAnim(playerPed, lib, 'armraisedidle_to_spinningidle_high', 8.0, -8.0, -1, 0, 0, false, false, false)
             elseif reason == 'chips' then
-                    TriggerEvent('QBCore:Notify', 'You Need '..Config.Amount..' Chips To Spin!', 'error')
+                    TriggerEvent('QBCore:Notify',Lang:t('error.need_chips', {Chipsamount = Config.Amount}), 'error')
             else
-                TriggerEvent('QBCore:Notify', 'Please, come back later to try your Luck on our LuckyWheel!', 'error')
+                TriggerEvent('QBCore:Notify', Lang:t('error.time'), 'error')
             end
         end)
     end
@@ -288,9 +288,9 @@ end)
 RegisterNetEvent('qb-luckywheel:client:winCarEmail', function()
     local CID = QBCore.Functions.GetPlayer(src).PlayerData.citizenid
     TriggerServerEvent('qb-phone:server:sendNewMail', {
-        sender =  Lang:t('sender'),
-        subject = Lang:t('subject'),
-        message = Lang:t('message', {vehicule = vehicle, PCID = CID}),
+        sender =  Lang:t('general.sender'),
+        subject = Lang:t('general.subject'),
+        message = Lang:t('general.message'),
     })
 end)
 
